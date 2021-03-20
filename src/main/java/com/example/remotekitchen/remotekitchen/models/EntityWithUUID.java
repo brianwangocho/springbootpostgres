@@ -1,6 +1,7 @@
 package com.example.remotekitchen.remotekitchen.models;
 
 
+import lombok.Data;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
@@ -16,6 +17,14 @@ public class EntityWithUUID {
     private UUID id;
 
     public EntityWithUUID() {
-        this.id = UUID.randomUUID();;
+        this.id = UUID.randomUUID();
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 }

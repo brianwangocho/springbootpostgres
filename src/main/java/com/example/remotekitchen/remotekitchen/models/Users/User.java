@@ -19,24 +19,24 @@ import java.util.Date;
 public class User extends EntityWithUUID {
 
     @Column(name = "first_name")
-    public String FirstName;
+    public String firstName;
     @Column(name = "last_name")
-    public String LastName;
+    public String lastName;
     @Column(name = "email")
-    public  String Email;
+    public  String email;
     @Column(name = "email_verified")
-    public Boolean EmailVerified;
+    public Boolean emailVerified;
     @Column(name = "status")
-    public String Status;
+    public String status;
     @Column(name = "account_locked")
-    public  Boolean AccountLocked;
+    public  Boolean accountLocked;
     @Column(name = "password")
-    public String Password;
+    public String password;
     @Column(name = "telephone")
-    public String Telephone;
+    public String telephone;
     @Column(name = "picture_url")
-    public String PictureUrl;
+    public String pictureUrl;
     @Column(name = "created_on",columnDefinition = "DATE")
-    public Date CreatedOn;
+    public Date createdOn;
 
 }
