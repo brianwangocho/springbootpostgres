@@ -4,20 +4,27 @@ import com.example.remotekitchen.remotekitchen.models.EntityWithUUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.UUID;
 
 
 @Entity
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "users")
-public class User extends EntityWithUUID {
 
+@Table(name = "users")
+public class User {
+
+    @Id
+    @Type(type = "pg-uuid")
+    @Column(name="id")
+    private UUID id;
     @Column(name = "first_name")
     public String firstName;
     @Column(name = "last_name")
@@ -39,4 +46,7 @@ public class User extends EntityWithUUID {
     @Column(name = "created_on",columnDefinition = "DATE")
     public Date createdOn;
 
+    public User() {
+        this.id = UUID.randomUUID();
+    }
 }

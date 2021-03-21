@@ -3,9 +3,12 @@ package com.example.remotekitchen.remotekitchen.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,10 +35,28 @@ public class JwtUtil {
     private Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
-    public String generateToken(String username) {
+
+
+    public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, username);
+
+        Collection<? extends GrantedAuthority> roles = userDetails.getAuthorities();
+
+        if (roles.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            claims.put("isAdmin", true);
+        }
+        if (roles.contains(new SimpleGrantedAuthority("ROLE_USER"))) {
+            claims.put("isUser", true);
+        }
+
+        return createToken(claims, userDetails.getUsername());
     }
+
+//  creating token using username only
+//    public String generateToken(String username) {
+//        Map<String, Object> claims = new HashMap<>();
+//        return createToken(claims, username);
+//    }
     private String createToken(Map<String, Object> claims, String subject) {
 
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
