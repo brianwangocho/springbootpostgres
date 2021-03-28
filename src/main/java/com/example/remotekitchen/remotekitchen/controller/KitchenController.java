@@ -19,17 +19,17 @@ public class KitchenController {
     KitchenRepository kitchenRepository;
 
 
-    @PostMapping("/add_kitchen")
+    @PostMapping(value = "/add_kitchen")
     public ResponseEntity<?>AddKitchen(){
 
         return null;
 
     }
-    @GetMapping("/nearbykitchens")
-    public List<Kitchen>NearByKitchens(@RequestParam("userlocation") List<Double> userLocation){
+    @GetMapping(value = "/nearbykitchens")
+    public List<Kitchen>NearByKitchens(@RequestParam("longitude") Double Longitude,@RequestParam("latitude") Double Latitude){
         //this extraction can also be implemented in return method
-        double userLongitude = userLocation.get(0);
-        double userLatitude = userLocation.get(1);
+        double userLongitude = Longitude;
+        double userLatitude = Latitude;
 
         return  kitchenRepository.findNearbyKitchensByDistanceFromUser(userLatitude,userLongitude);
     }

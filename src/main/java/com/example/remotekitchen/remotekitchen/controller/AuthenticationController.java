@@ -65,15 +65,15 @@ public class AuthenticationController {
         /////request after login
         message.setStatus("00");
         message.setMessage("Login was successful");
-        Date expiration = jwtUtil.extractExpiration(jwtUtil.generateToken(userdetails));
+        Date expiration = jwtUtil.extractExpiration(jwtUtil.generateToken(user.email));
         token.setExpiration(expiration);
         token.setEmail(user.email);
         token.setUserName(user.firstName+user.lastName);
 
         token.setPhone(user.telephone);
-        token.setId(user.getId());
+        token.setId(user.id);
         token.setMessage(message);
-        token.setToken(jwtUtil.generateToken(userdetails));
+        token.setToken(jwtUtil.generateToken(user.email));
 
         return ResponseEntity.status(200).body(token);
 

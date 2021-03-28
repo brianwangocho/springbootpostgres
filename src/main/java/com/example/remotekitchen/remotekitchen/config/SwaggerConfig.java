@@ -20,13 +20,12 @@ import java.util.List;
 @EnableSwagger2
 public class SwaggerConfig {
     public static final String AUTHORIZATION_HEADER = "Authorization";
-
     @Bean
     public Docket api(){
         return new Docket(DocumentationType.SWAGGER_2)
 
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.example.remotekitchen"))
                 .paths(PathSelectors.any())
                 .build()
                 .enable(true)
@@ -54,5 +53,4 @@ public class SwaggerConfig {
         return Lists.newArrayList(
                 new SecurityReference("JWT", authorizationScopes));
     }
-
 }

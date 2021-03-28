@@ -36,27 +36,27 @@ public class JwtUtil {
         return extractExpiration(token).before(new Date());
     }
 
-
-    public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<>();
-
-        Collection<? extends GrantedAuthority> roles = userDetails.getAuthorities();
-
-        if (roles.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            claims.put("isAdmin", true);
-        }
-        if (roles.contains(new SimpleGrantedAuthority("ROLE_USER"))) {
-            claims.put("isUser", true);
-        }
-
-        return createToken(claims, userDetails.getUsername());
-    }
-
-//  creating token using username only
-//    public String generateToken(String username) {
+//
+//    public String generateToken(UserDetails userDetails) {
 //        Map<String, Object> claims = new HashMap<>();
-//        return createToken(claims, username);
+//
+//        Collection<? extends GrantedAuthority> roles = userDetails.getAuthorities();
+//
+//        if (roles.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+//            claims.put("isAdmin", true);
+//        }
+//        if (roles.contains(new SimpleGrantedAuthority("ROLE_USER"))) {
+//            claims.put("isUser", true);
+//        }
+//
+//        return createToken(claims, userDetails.getUsername());
 //    }
+
+ // creating token using username only
+    public String generateToken(String username) {
+        Map<String, Object> claims = new HashMap<>();
+        return createToken(claims, username);
+    }
     private String createToken(Map<String, Object> claims, String subject) {
 
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
