@@ -20,9 +20,16 @@ public interface KitchenRepository extends JpaRepository<Kitchen, UUID> {
 //            , nativeQuery = true)
 //    List<NairobiHealthFacility> findAllHospitalsWithinSubCounty(@Param("subCountyId")  int subCountyId);
 
-@Query(value = "SELECT a.id,a.name," +
-        " public.st_distance(cast(a.geom as point),ST_SetSRID(ST_Point(:userLongitude,:userLatitude),4326)) AS distance" +
-        " from kitchens a  ORDER BY a.geom  <-> ST_SetSRID(ST_Point(:userLongitude,:userLatitude),4326)" +
+//    @Query(value = "SELECT a.id,a.name," +
+//            " ST_Distance((a.geom),ST_SetSRID(ST_Point(:userLongitude,:userLatitude),4326)) AS distance" +
+//            " from kitchens a  ORDER BY a.geom  <-> ST_SetSRID(ST_Point(:userLongitude,:userLatitude),4326)" +
+//            " LIMIT 5",nativeQuery = true)
+
+
+@Query(value = "SELECT  " +
+        "ST_Distance('SRID=4326;POINT('a.geom')'," +
+        "ST_SetSRID(ST_Point(:userLongitude,:userLatitude),4326)) AS Distance" +
+        " from kitchens a " +
         " LIMIT 5",nativeQuery = true)
-    List<Kitchen>findNearbyKitchensByDistanceFromUser(@Param("userLongitude") Double userLongitude,@Param("userLatitude")  Double userLatitude);
+    List<Double>findNearbyKitchensByDistanceFromUser(@Param("userLongitude") Double userLongitude,@Param("userLatitude")  Double userLatitude);
 }

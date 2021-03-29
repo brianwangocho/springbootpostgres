@@ -26,7 +26,7 @@ public class KitchenController {
 
     }
     @GetMapping(value = "/nearbykitchens")
-    public List<Kitchen>NearByKitchens(@RequestParam("longitude") Double Longitude,@RequestParam("latitude") Double Latitude){
+    public List<Double>NearByKitchens(@RequestParam("longitude") Double Longitude,@RequestParam("latitude") Double Latitude){
         //this extraction can also be implemented in return method
         double userLongitude = Longitude;
         double userLatitude = Latitude;
