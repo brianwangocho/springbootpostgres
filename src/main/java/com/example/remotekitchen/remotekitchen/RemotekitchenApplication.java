@@ -6,6 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collections;
+
 @SpringBootApplication
 
 public class RemotekitchenApplication {
@@ -16,10 +20,20 @@ public class RemotekitchenApplication {
         SpringApplication.run(RemotekitchenApplication.class, args
 
         );
-BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        System.out.println(bCryptPasswordEncoder.encode("W@ngocho123"));
+//BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//        System.out.println(bCryptPasswordEncoder.encode("W@ngocho123"));
+
+
+
 
 
     }
+
+
+//
+
+
+
+
 
 }
